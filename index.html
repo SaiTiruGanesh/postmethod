@@ -23,19 +23,31 @@
 		#name{
 			border-radius: 25px;
 		}
+		#select{
+			align-items: center;
+			border-radius: 25px;
+			color: brown;
+			background-color: pink;
+		}
 	</style>
 </head>
 <body>
 	<script type="text/javascript">
 		function res(){
-			var name=document.getElementById("name").value,password=document.getElementById("pass").value
-		 	console.log(name,password)
+			var name=document.getElementById("name").value,password=document.getElementById("pass").value,selectedcar=document.getElementById("car").value
+			var gmale=document.getElementById("male").checked
+			var gfemale=document.getElementById("female").checked
+			 	console.log(name,password,selectedcar)
+			if(gmale==true) var gender="male"
+				else gender="female"
+					 	console.log(gender)
+		
 		 	fetch("http://localhost:3000/newData",{
 				method:"POST",
 				headers:{
 					"Content-Type":"application/json"
 				},
-				body:JSON.stringify({name:name,password:password})
+				body:JSON.stringify({name:name,password:password,selectedcar:selectedcar})
 			})
 			.then((res)=>{
 				console.log(res)
@@ -46,12 +58,20 @@
 				alert(err)
 			})
 		}
-		
 	</script>
 	<div class="style">
 	<p><input id="name" placeholder="enter your name"/></p>
 	<p><input id="pass" placeholder="enter your password"></p>
+	<select  id="car">
+		<option>select a car</option>
+			<option>skoda</option>
+			<option>suziki</option>
+			<option>maruthi</option>
+	</select>
+	<br>
+	<p><input id="male" type="radio"name="jail">Male</p>
+	<p><input id="female"type="radio"name="jail">Female</p>
 	<p><button class="pop" onclick="res()">Submit</button></p>
 	</div>
 </body>
-</html>
+</html> 
